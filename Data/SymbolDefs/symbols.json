@@ -1,4 +1,11 @@
 {
     "l_parentheses": "(",
-    "r_parentheses": ")"
+    "r_parentheses": ")",
+    "l_bracket": "[",
+    "r_bracket": "]",
+    "l_brace": "{",
+    "r_brace": "}",
+    "line_comment": "//",
+    "start_comment": "/*",
+    "end_comment": "*/"
 }

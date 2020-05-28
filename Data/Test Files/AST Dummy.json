@@ -1,0 +1,55 @@
+{
+    "examples": [
+        {
+            "statement": "VariableDeclaration",
+            "type": "string",
+            "id": "s",
+            "assignment": {
+                "type": "literal",
+                "value": "This is a string"
+            }
+        },
+        {
+            "statement": "GetFromId",
+            "id": "s"
+        },
+        {
+            "statement": "SetVarFromId",
+            "id": "s",
+            "assignment": {
+                "type": "literal",
+                "value": "This is a different string"
+            }
+        },
+        {
+            "statement": "Conditional",
+            "condition": {
+                "expression": true
+            },
+            "body":[
+                
+            ],
+            "else": {
+                "has_else": false,
+                "body":[
+
+                ]
+            }
+        },
+        {
+            "statement": "ForLoop",
+            "index": {
+                "VariableDeclaration": {
+                    "type": "num",
+                    "id": "i",
+                    "assignment": {
+                        "type": "literal",
+                        "value": 1
+                    }
+                }
+            },
+            "endpoint": 10,
+            "step": 1
+        }
+    ]
+}
