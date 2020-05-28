@@ -15,7 +15,11 @@ for filename in os.listdir(_dir):
     with open(os.path.join(_dir, filename), "r") as f:
         symbol_defs = {**symbol_defs, **json.load(f)}
 
-print(keyword_defs)
-print(symbol_defs)
+_dir = "Data/Test Files/Test 1.casl"
+with open(_dir, "r") as f:
+    data = f.read()
 
 l = Lexer(keyword_defs, symbol_defs)
+tokens = l.tokenize(data)
+
+print(tokens)

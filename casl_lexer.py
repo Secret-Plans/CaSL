@@ -4,7 +4,16 @@ class Lexer:
     def __init__(self, keyword_defs : dict, symbol_defs : dict) -> None:
         self.keyword_defs = keyword_defs
         self.symbol_defs = symbol_defs
-        
+
+        self.starter_symbols = "" #Starter symbols are symbols that operator/symbol tokens can have as their first character
+        self.following_symbols = "" #Following symbols are symbols that operator/symbol tokens can contain after their first character
+        for item in symbol_defs.values():
+            if not(item[0] in self.starter_symbols):
+                self.starter_symbols += item[0]
+            if len(item) > 1:
+                if not(item[1] in self.following_symbols):
+                    self.following_symbols += item[1]
+
         self.tokens = []
     
 
@@ -30,9 +39,13 @@ class Lexer:
 
 
     def tokenize(self, data : str) -> list:
+        data += " "
+        
         token_type = ""
         token_value = ""
         for char in data:
+
+            # Handles token if it's an identifier
             if token_type == "id":
                 if char.isalnum():
                     token_value += char
@@ -44,14 +57,16 @@ class Lexer:
                     token_type = ""
                     token_value = ""
             
+            #Handles token if it's a number
             elif token_type == "number":
-                if char.isnumeric or char == ".":
+                if char.isnumeric():
                     token_value += char
                 else:
                     self.add_token(token_type, token_value)
                     token_type = ""
                     token_value = ""
             
+            #Handles token if it's a string
             elif token_type == "string":
                 if char == "\"":
                     self.add_token(token_type, token_value)
@@ -61,9 +76,23 @@ class Lexer:
                 else:
                     token_value += char
 
-            elif token_type == ""
+            #Handles token if it's a symbol
+            elif token_type == "symbol":
+                if char in self.following_symbols:
+                    token_value += char
+                else:
+                    self.add_token(self.symbol_lookup(token_value))
+                    token_type = ""
+                    token_value = ""
 
-            elif token_type == "":
+            #Handles token if it's a newline
+            elif token_type == "newline":
+                self.add_token(token_type)
+                token_type = ""
+                token_value = ""
+
+            #Handles token if a type has not been assigned to it yet
+            if token_type == "":
                 if char.isalpha():
                     token_type = "id"
                     token_value += char
@@ -72,16 +101,18 @@ class Lexer:
                     token_value += char
                 elif char == "\"":
                     token_type = "string"
-                elif char in "+-*/":
+                elif char in self.starter_symbols:
                     token_type = "symbol"
                     token_value += char
                 elif char == "\n":
-                    token_type == "newline"
+                    token_type = "newline"
         
-        return []
+        return self.tokens
 
 
 class LexerError(Exception):
+    """Error during the tokenizing process
+    """
     def __init__(self, character_pos, character):
         self.character_pos = character_pos
         self.character = character
@@ -91,6 +122,8 @@ class LexerError(Exception):
 
 
 class LookupError(Exception):
+    """Error during the process of looking up a symbol or checking for a keyword
+    """
     def __init__(self, procedure : str, item : str):
         self.procedure = procedure
         self.item = item
