@@ -1,14 +1,21 @@
 
 
 class Lexer:
-    def __init__(self, keyword_defs: dict, symbol_defs: dict):
+    def __init__(self, keyword_defs : dict, symbol_defs : dict) -> None:
         self.keyword_defs = keyword_defs
         self.symbol_defs = symbol_defs
         
         self.tokens = []
     
 
-    def keyword_lookup(self, keyword : str) -> bool:
+    def add_token(self, token_key : str, token_value : str = None) -> None:
+        if token_value == None:
+            self.tokens.append(token_key)
+        else:
+            self.tokens.append(f"{token_key}:{token_value}")
+
+
+    def is_keyword(self, keyword : str) -> bool:
         try:
             return keyword in list(self.keyword_defs) #Returns true or false based on whether the keyword is in the defs
         except:
@@ -22,21 +29,60 @@ class Lexer:
         raise LookupError("symbol", symbol)
 
 
-
     def tokenize(self, data : str) -> list:
         token_type = ""
         token_value = ""
-        for i in len(data):
-            try:
-                char = data[i]
-            except:
-                raise LexerError(i, char)
+        for char in data:
+            if token_type == "id":
+                if char.isalnum():
+                    token_value += char
+                else:
+                    if self.is_keyword(token_value):
+                        self.add_token(token_value)
+                    else:
+                        self.add_token(token_type, token_value)
+                    token_type = ""
+                    token_value = ""
+            
+            elif token_type == "number":
+                if char.isnumeric or char == ".":
+                    token_value += char
+                else:
+                    self.add_token(token_type, token_value)
+                    token_type = ""
+                    token_value = ""
+            
+            elif token_type == "string":
+                if char == "\"":
+                    self.add_token(token_type, token_value)
+                    token_type = ""
+                    token_value = ""
+                    continue
+                else:
+                    token_value += char
+
+            elif token_type == ""
+
+            elif token_type == "":
+                if char.isalpha():
+                    token_type = "id"
+                    token_value += char
+                elif char.isnumeric():
+                    token_type = "number"
+                    token_value += char
+                elif char == "\"":
+                    token_type = "string"
+                elif char in "+-*/":
+                    token_type = "symbol"
+                    token_value += char
+                elif char == "\n":
+                    token_type == "newline"
         
         return []
 
 
 class LexerError(Exception):
-    def __init__(self, character_pos = 0, character = "?"):
+    def __init__(self, character_pos, character):
         self.character_pos = character_pos
         self.character = character
     
