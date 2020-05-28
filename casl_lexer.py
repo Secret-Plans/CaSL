@@ -26,8 +26,11 @@ class Lexer:
     def tokenize(self, data : str) -> list:
         token_type = ""
         token_value = ""
-        for char in data:
-            pass
+        for i in len(data):
+            try:
+                char = data[i]
+            except:
+                raise LexerError(i, char)
         
         return []
 
