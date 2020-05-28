@@ -1,0 +1,8 @@
+{
+    "equal": "==",
+    "not_equal": "!=",
+    "greater": ">",
+    "lesser": "<",
+    "greater_equal": ">=",
+    "lesser_equal": "<="
+}

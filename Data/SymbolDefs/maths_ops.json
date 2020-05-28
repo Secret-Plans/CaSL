@@ -1,0 +1,8 @@
+{
+    "plus": "+",
+    "minus": "-",
+    "multiply": "*",
+    "divide": "/",
+    "exponent": "^",
+    "modulus": "%"
+}
