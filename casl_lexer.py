@@ -1,7 +1,15 @@
 
 
 class Lexer:
+    """A lexical analyzer that generates tokens based on some simple rules and a set of reserved keywords and symbols.
+    """
     def __init__(self, keyword_defs : dict, symbol_defs : dict) -> None:
+        """Initializes the lexer with a set of keyword and symbol definitions.
+
+        Arguments:
+            keyword_defs {dict} -- Keyword definitions.
+            symbol_defs {dict} -- Symbol definitions.
+        """
         self.keyword_defs = keyword_defs
         self.symbol_defs = symbol_defs
 
@@ -18,6 +26,14 @@ class Lexer:
     
 
     def add_token(self, token_key : str, token_value : str = None) -> None:
+        """Adds a token to the lexer's token array.
+
+        Arguments:
+            token_key {str} -- The key or type of token, e.g: id or string.
+
+        Keyword Arguments:
+            token_value {str} -- The value of the token, if needed, e.g: 5 or "Hello World". (default: {None})
+        """
         if token_value == None:
             self.tokens.append(token_key)
         else:
@@ -25,6 +41,17 @@ class Lexer:
 
 
     def is_keyword(self, keyword : str) -> bool:
+        """Checks if a given identifier is a reserved keyword or not.
+
+        Arguments:
+            keyword {str} -- The identifier to lookup in the keyword definitions.
+
+        Raises:
+            LookupError: Raises if the keyword lookup fails for whatever reason.
+
+        Returns:
+            bool -- Whether or not the identifier is a reserved keyword or not.
+        """
         try:
             return keyword in list(self.keyword_defs) #Returns true or false based on whether the keyword is in the defs
         except:
@@ -32,6 +59,17 @@ class Lexer:
 
 
     def symbol_lookup(self, symbol: str) -> str:
+        """Finds the name of the operator or symbol corresponding to it's notation via the symbol definitions.
+
+        Arguments:
+            symbol {str} -- The symbol notation to lookup.
+
+        Raises:
+            LookupError: Raised if there is no name in the definitions corresponding to the symbol,
+
+        Returns:
+            str -- The name of the symbol.
+        """
         for key, value in self.symbol_defs.items():
             if symbol == value:
                 return key
@@ -39,6 +77,14 @@ class Lexer:
 
 
     def tokenize(self, data : str) -> list:
+        """Generates a list of tokens and returns them as a list.
+
+        Arguments:
+            data {str} -- The data to be tokenized.
+
+        Returns:
+            list -- The generated list of tokens.
+        """
         data += " "
         
         token_type = ""
