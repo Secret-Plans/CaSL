@@ -9,4 +9,5 @@ Once you've written a program with CaSL, the compiler can convert it into a .cas
 1. Lexical Analysis
 2. Parsing
 3. Compilation
+
 Each step feeds into the next until a .casb file is outputted. The .casb file is the CASIO Basic equivalent of the .casl that was compiled.
