@@ -1,5 +1,7 @@
 {
-    "if": "if",
-    "elif": "elif",
-    "else": "else"
+    "root":[
+        "if",
+        "elif",
+        "else"
+    ]
 }

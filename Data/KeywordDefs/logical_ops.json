@@ -1,6 +1,8 @@
 {
-    "and": "and",
-    "or": "or",
-    "xor": "xor",
-    "not": "not"
+    "root":[
+        "and",
+        "or",
+        "xor",
+        "not"
+    ]
 }
