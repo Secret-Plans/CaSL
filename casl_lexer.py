@@ -3,15 +3,18 @@
 class Lexer:
     """A lexical analyzer that generates tokens based on some simple rules and a set of reserved keywords and symbols.
     """
-    def __init__(self, keyword_defs : dict, symbol_defs : dict) -> None:
+    def __init__(self, keyword_defs : dict, symbol_defs : dict, settings : dict) -> None:
         """Initializes the lexer with a set of keyword and symbol definitions.
 
         Arguments:
             keyword_defs {dict} -- Keyword definitions.
             symbol_defs {dict} -- Symbol definitions.
+            settings {dict} -- Lexer settings. Change at Data/Config.json
         """
         self.keyword_defs = keyword_defs
         self.symbol_defs = symbol_defs
+
+        self.settings = settings
 
         self.starter_symbols = "" #Starter symbols are symbols that operator/symbol tokens can have as their first character
         self.following_symbols = "" #Following symbols are symbols that operator/symbol tokens can contain after their first character
@@ -85,8 +88,10 @@ class Lexer:
         Returns:
             list -- The generated list of tokens.
         """
-        data += " "
+        data += "\n"
         
+        print_each_token = self.settings["Print Token"]
+
         token_type = ""
         token_value = ""
         for char in data:
@@ -100,6 +105,7 @@ class Lexer:
                         self.add_token(token_value)
                     else:
                         self.add_token(token_type, token_value)
+                    if print_each_token: print(f"Generated token \t{token_type}\t : {token_value}")
                     token_type = ""
                     token_value = ""
             
@@ -109,6 +115,7 @@ class Lexer:
                     token_value += char
                 else:
                     self.add_token(token_type, token_value)
+                    if print_each_token: print(f"Generated token \t{token_type}\t : {token_value}")
                     token_type = ""
                     token_value = ""
             
@@ -116,6 +123,7 @@ class Lexer:
             elif token_type == "string":
                 if char == "\"":
                     self.add_token(token_type, token_value)
+                    if print_each_token: print(f"Generated token \t{token_type}\t : {token_value}")
                     token_type = ""
                     token_value = ""
                     continue
@@ -128,12 +136,14 @@ class Lexer:
                     token_value += char
                 else:
                     self.add_token(self.symbol_lookup(token_value))
+                    if print_each_token: print(f"Generated token \t{token_type}\t : {token_value}")
                     token_type = ""
                     token_value = ""
 
             #Handles token if it's a newline
             elif token_type == "newline":
                 self.add_token(token_type)
+                if print_each_token: print(f"Generated token \t{token_type}\t : {token_value}")
                 token_type = ""
                 token_value = ""
 
@@ -153,6 +163,9 @@ class Lexer:
                 elif char == "\n":
                     token_type = "newline"
         
+        if self.settings["Print Token List"]:
+            print(f"Tokens: {self.tokens}")
+
         return self.tokens
 
 
