@@ -1,3 +1,7 @@
+
+
+num x = 5
+
 if 1
     print("Test")
 end
