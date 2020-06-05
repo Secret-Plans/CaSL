@@ -1,0 +1,21 @@
+{
+    "File Loading":{
+        "Print Settings": true,
+        "Print Keywords": true,
+        "Print Symbols": true
+    },
+    
+    "Lexer":{
+        "Print Token": true,
+        "Print Token List": true
+    },
+    
+    "Parser":{
+        "Print Statement During": true,
+        "Print AST": true
+    },
+
+    "Compiler":{
+
+    }
+}
