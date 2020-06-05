@@ -1,0 +1,7 @@
+{
+    "assign": "=",
+    "assign_add": "+=",
+    "assign_sub": "-=",
+    "assign_mul": "*=",
+    "assign_div": "/="
+}
