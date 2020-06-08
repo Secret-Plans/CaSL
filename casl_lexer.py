@@ -88,8 +88,9 @@ class Lexer:
         Returns:
             list -- The generated list of tokens.
         """
-        data += "\n"
-        
+
+        data += "\n "
+
         print_each_token = self.settings["Print Token"]
 
         token_type = ""
@@ -110,7 +111,7 @@ class Lexer:
                     token_value = ""
             
             #Handles token if it's a number
-            elif token_type == "number":
+            elif token_type == "num":
                 if char.isnumeric():
                     token_value += char
                 else:
@@ -153,7 +154,7 @@ class Lexer:
                     token_type = "id"
                     token_value += char
                 elif char.isnumeric():
-                    token_type = "number"
+                    token_type = "num"
                     token_value += char
                 elif char == "\"":
                     token_type = "string"
