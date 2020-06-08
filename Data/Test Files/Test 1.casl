@@ -1,7 +1,8 @@
 
 
 num x = 5
+string s = "Nice"
 
-if 1
-    print("Test")
-end
+s = "New String"
+num y = x
+x = y
