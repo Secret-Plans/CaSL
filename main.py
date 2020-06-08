@@ -51,7 +51,10 @@ tokens = l.tokenize(data)
 
 # Parsing
 p = Parser(["num", "string", "bool", "list", "matrix"], settings["Parser"])
-# ast = p.parse(tokens)
+ast = p.parse(tokens)
+
+with open("Data/Output/ast.json", "w") as f:
+    f.write(json.dumps(ast, indent=4))
 
 
 # Compilation
