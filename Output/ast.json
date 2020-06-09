@@ -1,0 +1,59 @@
+{
+    "program": {
+        "body": [
+            {
+                "type": "Variable Declaration",
+                "declaration": {
+                    "type": "num",
+                    "id": "x",
+                    "value": {
+                        "type": "literal",
+                        "data": "5"
+                    }
+                }
+            },
+            {
+                "type": "Variable Declaration",
+                "declaration": {
+                    "type": "string",
+                    "id": "s",
+                    "value": {
+                        "type": "literal",
+                        "data": "Nice"
+                    }
+                }
+            },
+            {
+                "type": "Variable Assignment",
+                "assignment": {
+                    "id": "s",
+                    "value": {
+                        "type": "literal",
+                        "data": "New String"
+                    }
+                }
+            },
+            {
+                "type": "Variable Declaration",
+                "declaration": {
+                    "type": "num",
+                    "id": "y",
+                    "value": {
+                        "type": "id",
+                        "data": "x"
+                    }
+                }
+            },
+            {
+                "type": "Variable Assignment",
+                "assignment": {
+                    "id": "x",
+                    "value": {
+                        "type": "id",
+                        "data": "y"
+                    }
+                }
+            }
+        ]
+    }
+}
