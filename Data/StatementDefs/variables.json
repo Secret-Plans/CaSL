@@ -1,0 +1,18 @@
+{
+    "Variable Assignment": {
+        "type": "Variable Assignment",
+        "assignment": {
+            "id": "",
+            "value": {}
+        }
+    },
+
+    "Variable Declaration": {
+        "type": "Varaible Declaration",
+        "declaration": {
+            "type": "",
+            "id": "",
+            "value": {}
+        }
+    }
+}

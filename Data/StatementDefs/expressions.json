@@ -1,0 +1,15 @@
+{
+    "Expression": {
+        "type": "Expression",
+        "data":{
+            "op": "",
+            "left": "",
+            "right": ""
+        }
+    },
+    
+    "Value": {
+        "type": "",
+        "data": ""
+    }
+}
